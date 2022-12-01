@@ -33,4 +33,9 @@ public class RedditHomePage {
 		searchBar.sendKeys(input);
 		searchBar.submit();
 	}
+	
+	public void closeLoginPrompt() {
+		WebElement exit = driver.findElement(By.xpath("/html/body/div[1]/div/div[2]/div[3]/div[2]/div/button"));
+		exit.click();
+	}
 }

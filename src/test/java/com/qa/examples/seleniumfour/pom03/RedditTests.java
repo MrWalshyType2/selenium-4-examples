@@ -7,12 +7,14 @@ import java.time.Duration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriver.Timeouts;
 import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
 
 import com.qa.examples.seleniumfour.pom03.pages.nofactory.RedditHomePage;
+import com.qa.examples.seleniumfour.pom03.pages.nofactory.RedditLoginPage;
 import com.qa.examples.seleniumfour.utilities.ScreenshotManager;
 import com.qa.examples.seleniumfour.utilities.WebDriverFactory;
 
@@ -34,8 +36,9 @@ public class RedditTests {
 	
 	@Test
 	public void openReddit() throws InterruptedException {
-		redditHomePage.search("hello");
-		
+//		redditHomePage.search("hello");
+		redditHomePage.clickLogin()
+		              .login("test", "");
 		Thread.sleep(5000);
 	}
 	

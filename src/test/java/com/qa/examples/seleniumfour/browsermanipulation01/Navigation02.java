@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebDriver.Navigation;
 import org.openqa.selenium.WebDriver.Timeouts;
 import org.openqa.selenium.WebDriver.Window;
@@ -35,13 +36,14 @@ public class Navigation02 {
 		 * Use to agree to the terms and conditions form when first navigating to the Google search page.
 		 */
 		public void agreeToTerms() {
-			WebElement agreeBtn = driver.findElement(By.xpath("//button[div[text()='I agree']]"));
+			WebElement agreeBtn = driver.findElement(By.xpath("//button[div[text()='Accept all']]"));
 			agreeBtn.click();
 		}
 		
 		@Test
 		public void navigationExample() throws InterruptedException {
 			Navigation nav = driver.navigate();
+			
 			// navigating to a page
 			nav.to("https://www.google.com");
 			agreeToTerms();

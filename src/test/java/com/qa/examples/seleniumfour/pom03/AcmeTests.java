@@ -20,6 +20,7 @@ import com.qa.examples.seleniumfour.utilities.ScreenshotManager;
 import com.qa.examples.seleniumfour.utilities.WebDriverFactory;
 
 public class AcmeTests {
+	
 	private WebDriver driver;
 	private ScreenshotManager screenshotManager;
 	private AcmeLoginPageNoPageFactory acmeLoginPageNoPageFactory;
@@ -33,12 +34,13 @@ public class AcmeTests {
 		Timeouts timeouts = driver.manage().timeouts();
 		window.maximize();
 		timeouts.pageLoadTimeout(Duration.ofSeconds(30));
-		timeouts.implicitlyWait(Duration.ofSeconds(3));
+//		timeouts.implicitlyWait(Duration.ofSeconds(3));
 		acmeLoginPageNoPageFactory = new AcmeLoginPageNoPageFactory(driver);
-		acmeLoginPage = PageFactory.initElements(driver, AcmeLoginPage.class);
+//		acmeLoginPage = PageFactory.initElements(driver, AcmeLoginPage.class);
+		acmeLoginPage = new AcmeLoginPage(driver);
 	}
 
-//	@Ignore
+	@Ignore
 	@Test
 	public void acmeLoginWithoutPageFactoryTest() throws InterruptedException, IOException {
 		String expectedUsername = "Jack Gomez";
@@ -48,7 +50,7 @@ public class AcmeTests {
 		assertEquals(expectedUsername, actualUsername);
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void acmeLoginWithPageFactoryTest() throws IOException {
 		String expectedUsername = "Jack Gomez";

@@ -44,7 +44,7 @@ public class GoogleTest01 {
 	 * Use to agree to the terms and conditions form when first navigating to the Google search page.
 	 */
 	public void agreeToTerms() {
-		WebElement agreeBtn = driver.findElement(By.xpath("//button[div[text()='I agree']]"));
+		WebElement agreeBtn = driver.findElement(By.xpath("//button[div[text()='Accept all']]"));
 		agreeBtn.click();
 	}
 	

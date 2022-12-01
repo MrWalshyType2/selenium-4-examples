@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.function.Function;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,6 +17,10 @@ import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.WebDriver.Timeouts;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SwagLabsTests {
 
@@ -33,7 +38,7 @@ public class SwagLabsTests {
 		
 		Options options = driver.manage();
 		Timeouts timeouts = options.timeouts();
-		timeouts.implicitlyWait(Duration.ofSeconds(15));
+//		timeouts.implicitlyWait(Duration.ofSeconds(15));
 		timeouts.pageLoadTimeout(Duration.ofSeconds(15));
 	}
 
@@ -44,9 +49,23 @@ public class SwagLabsTests {
 	}
 	
 	private void login(String username, String password) {
-		WebElement usernameInput = driver.findElement(usernameSelector);
-		WebElement passwordInput = driver.findElement(passwordSelector);
-		WebElement loginBtn = driver.findElement(loginBtnSelector);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//		WebElement usernameInput = wait.until(ExpectedConditions.visibilityOf(driver.findElement(usernameSelector)));
+		WebElement usernameInput = wait.until((webDriver) -> webDriver.findElement(usernameSelector));
+		
+//		WebElement passwordInput = driver.findElement(passwordSelector);
+		
+		Wait<WebDriver> fluentWait = new FluentWait<WebDriver>(driver)
+											.pollingEvery(Duration.ofMillis(500))
+											.withTimeout(Duration.ofSeconds(15));
+		
+//		WebElement loginBtn = fluentWait.until((driver) -> driver.findElement(loginBtnSelector));
+//		WebElement passwordInput = driver.findElement(passwordSelector);
+		WebElement passwordInput = fluentWait.until(ExpectedConditions.visibilityOf(driver.findElement(passwordSelector)));
+		WebElement loginBtn = fluentWait.until(ExpectedConditions.elementToBeClickable(loginBtnSelector));
+
+		
+//		WebElement loginBtn = driver.findElement(loginBtnSelector);
 
 		usernameInput.sendKeys(username);
 		passwordInput.sendKeys(password);
